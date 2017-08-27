@@ -12,6 +12,10 @@ function domString(getProduct){
 	writeToDom(productString);
 }
 
+
+
+
+
 function writeToDom(items){
 	document.getElementById("items").innerHTML=items;
 }
@@ -37,15 +41,27 @@ myRequest.send();
 function buildSelectString(selector){
 	var selectString = "";
 	for(var i = 0; i < selector.length; i++){
-	selectString += `<select id="select">`;
-	selectString +=	`<option value=${selector[i].id}>${selector[i].season_discount}</option>`;
-	selectString += `</select>`;
+	selectString +=	`<option class="options" value=${selector[i].id}>${selector[i].season_discount}</option>`;
 	}	
 	writeToSelector(selectString);	
+
+
+var stuff = document.getElementsByClassName("category");
+
+function changeCatName(){
+	for(var j = 0; j < category.length; j++)
+		if (category.value == 1){
+			stuff.innerHTML = "Apparel";
+		} if (category.value == 2) {
+			stuff.innerHTML = "Furniture";
+		} if (category.value == 3){
+			stuff.innerHTML = "Household";
+		}
+}
 }
 
 function writeToSelector(choices){
-	document.getElementById("season").innerHTML=choices;
+	document.getElementById("select").innerHTML=choices;
 }
 
 function putProductsInSelector(){
@@ -58,3 +74,15 @@ myRequest2.addEventListener("load", putProductsInSelector);
 myRequest2.addEventListener("error", doThisIfErrors);
 myRequest2.open("GET", "categories.json")
 myRequest2.send();
+
+// var newPrice;
+// var selectedSeason = document.getElementsByClassName("options");
+
+// function changePrice(){
+// 	if(selectedSeason = "Spring"){
+// 		newPrice = parseInt(document.getElementsByClassName("price")) * 0.85;
+// 	}
+// 	console.log(newPrice);
+// }
+
+// document.getElementById("select").addEventListener("onChange", changePrice);
