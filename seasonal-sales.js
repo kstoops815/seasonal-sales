@@ -17,8 +17,6 @@ myProducts.addEventListener("error", doThisIfErrors);
 myProducts.open("GET", "products.json")
 myProducts.send();
 
-
-
 function getCategory(stuff){
 	var myCategories = new XMLHttpRequest();
 	myCategories.addEventListener("load", putProductsInSelector);
@@ -59,7 +57,7 @@ function buildSelectString(selector){
 	writeToSelector(selectString);	
 }
 
-
+var stuff = document.getElementsByClassName("category");
 
 function domString(getProduct){
 	var productString = "";
