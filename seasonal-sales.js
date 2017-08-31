@@ -38,33 +38,32 @@ function combineArray(productsArray, categoriesArray){
 		var currentProductId = product.category_id;
 		console.log("products with category_id", currentProductId);
 		
-		// categoriesArray.forEach(function(categories){
-		// 	if(currentProductId === categories.id){
-		// 		product["categoryName"] = categories.name;
-		// 	}
-		// 	console.log("new array with category name", product);
+		categoriesArray.forEach(function(category){
+			if(currentProductId === category.id){
+				product["categoryName"] = category.name;
+				product["season"] = category.season_discount;
+				product["priceDiscount"] = category.discount;
+				product["finalPrice"] = product.price - (product.price * product.priceDiscount);
+			}
+			
 		 });
-	};
+	 });
+	console.log("new array with category name", productsArray);
+};
 
-
-
-
-function buildSelectString(selector){
-	var selectString = "";
-	for(var i = 0; i < selector.length; i++){
-	selectString +=	`<option class="options" value=${selector[i].id}>${selector[i].season_discount}</option>`;
-	}	
-	writeToSelector(selectString);	
-}
-
-var stuff = document.getElementsByClassName("category");
+//if statement if selected season from dropdown === getProduct[i].season print final price
+//else print price
 
 function domString(getProduct){
 	var productString = "";
 	for(var i = 0; i < getProduct.length; i++){
 		productString += `<div class="product">`;
 		productString += `<h2>${getProduct[i].name}</h2>`;
+	if("winter" === getProduct[i].season){
+		productString += `<p class="price">${getProduct[i].finalPrice}</p>`;
+	} else{
 		productString += `<p class="price">${getProduct[i].price}</p>`;
+	}
 		productString += `<p class="category">${getProduct[i].category_id}</p>`;
 		productString += `</div>`;
 	}
