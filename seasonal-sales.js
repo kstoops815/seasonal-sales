@@ -1,5 +1,6 @@
 console.log("in seasonal sales");
 
+
 function domString(getProduct){
 	var productString = "";
 	for(var i = 0; i < getProduct.length; i++){
@@ -11,10 +12,6 @@ function domString(getProduct){
 	}
 	writeToDom(productString);
 }
-
-
-
-
 
 function writeToDom(items){
 	document.getElementById("items").innerHTML=items;
@@ -50,15 +47,19 @@ var stuff = document.getElementsByClassName("category");
 
 function changeCatName(){
 	for(var j = 0; j < category.length; j++)
-		if (category.value == 1){
-			stuff.innerHTML = "Apparel";
-		} if (category.value == 2) {
-			stuff.innerHTML = "Furniture";
-		} if (category.value == 3){
-			stuff.innerHTML = "Household";
+		if (category.value === "1"){
+			stuff = "Apparel";
+		} if (category.value === "2") {
+			stuff = "Furniture";
+		} if (category.value === "3"){
+			stuff = "Household";
 		}
+
+		console.log(stuff);
 }
 }
+
+changeCatName();
 
 function writeToSelector(choices){
 	document.getElementById("select").innerHTML=choices;
