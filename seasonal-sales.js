@@ -1,8 +1,11 @@
 console.log("in seasonal sales");
 
+var getProducts = [];
+
 function putProductsInDom(){
 	var productsData = JSON.parse(this.responseText);
 	console.log("products data", productsData.products);
+	getProducts = productsData.products;
 	getCategory(productsData.products);
 }
 
@@ -29,6 +32,7 @@ function getCategory(stuff){
 		console.log("categories", categoriesData);
 		console.log("stuff", stuff);
 		combineArray(stuff, categoriesData);
+		domString(getProducts);
 
 	}
 }
@@ -54,22 +58,32 @@ function combineArray(productsArray, categoriesArray){
 //if statement if selected season from dropdown === getProduct[i].season print final price
 //else print price
 
+ var option;
+ document.getElementById("select").addEventListener("change", function(e){
+	option = e.target.value;
+	domString(getProducts);
+	console.log("event listener", option);
+});
+
 function domString(getProduct){
+	console.log("in dom string", getProduct.length);
 	var productString = "";
 	for(var i = 0; i < getProduct.length; i++){
 		productString += `<div class="product">`;
 		productString += `<h2>${getProduct[i].name}</h2>`;
-	if("winter" === getProduct[i].season){
-		productString += `<p class="price">${getProduct[i].finalPrice}</p>`;
-	} else{
-		productString += `<p class="price">${getProduct[i].price}</p>`;
-	}
-		productString += `<p class="category">${getProduct[i].category_id}</p>`;
+		if(option === getProduct[i].season){
+			productString += `<p class="price">${(getProduct[i].finalPrice.toFixed(2))}</p>`;
+		} else{
+			productString += `<p class="price">${getProduct[i].price}</p>`;
+		}
+		productString += `<p class="category">${getProduct[i].categoryName}</p>`;
 		productString += `</div>`;
 	}
 	writeToDom(productString);
+	console.log("product string", productString.length);
 }
 
 function writeToDom(items){
 	document.getElementById("items").innerHTML=items;
 }
+
